@@ -1,0 +1,43 @@
+spring:
+  # thymeleaf configuration
+  thymeleaf:
+    # close cache
+    cache: false
+  # datasource configuration
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/flashsale?useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/New_York
+    username: root
+    password: 000
+    # default connector
+    hikari:
+      pool-name: HikariCP
+      # minimum number of idle connections
+      minimum-idle: 5
+      # idle connection timeout: 3min (default timeout: 600000 - 10min)
+      idle-timeout: 180000
+      # connection timeout: use default 30s
+      connection-timeout: 30000
+      # maximum lifetime of a connection: use default 30min (0 - forever)
+      max-lifetime: 1800000
+      # maximum number of connections: use default
+      maximum-pool-size: 10
+      # auto commit setting: use default - why: https://stackoverflow.com/a/4454419
+      auto-commit: true
+      # test if connections work (are alive)
+      connection-test-query: SELECT 1
+
+mybatis-plus:
+  # mapper file
+  mapper-locations:
+    classpath*:/mapper/*Mapper.xml
+  type-aliases-package: yuxm.flashsale
+
+logging:
+  # filter logging
+  level:
+    yuxm.flashsale.mapper: debug
+
+
+
+
