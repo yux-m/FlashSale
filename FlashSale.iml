@@ -111,5 +111,6 @@
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:5.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:6.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:6.0.3" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.15" level="project" />
   </component>
 </module>
