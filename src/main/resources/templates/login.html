@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- include Bootstrap css -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" rel="stylesheet">
+
+    <!-- custom styles for this page -->
+    <link href="./css/login.css" rel="stylesheet">
+
+</head>
+
+<body class="text-center">
+
+<main class="form-signin w-100 m-auto">
+    <form>
+        <!-- gold flash icon -->
+        <span style="font-size: 4em; color: Gold;">
+            <i class="fa-solid fa-bolt-lightning"></i>
+        </span>
+
+        <h1 class="h3 mb-3 fw-normal"><b>Sign in</b></h1>
+
+        <div class="form-floating">
+            <input class="form-control" id="email" name="email" placeholder="name@example.com" required="true"
+                   type="email">
+            <label for="email">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" id="password" name="password" placeholder="password" required="true"
+                   type="password">
+            <label for="password">Password</label>
+
+        </div>
+        <br>
+
+        <button class="w-100 btn btn-lg btn-primary" onclick="reset()" type="reset">reset</button>
+        <p></p>
+        <button class="w-100 btn btn-lg btn-primary" onclick="login()" type="submit">sign in</button>
+    </form>
+</main>
+
+
+<!-- include Bootstrap js -->
+<script crossorigin="anonymous"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- include fontawesome -->
+<script crossorigin="anonymous" src="https://kit.fontawesome.com/bd718eb9ad.js"></script>
+</body>
+
+<script>
+    function login() {
+        $("#loginForm").validate({
+            submitHandler: function (form) {
+                doLogin();  //execute login after validation
+            }
+        });
+    }
+
+    function doLogin() {
+        g_showLoading();
+
+        var input = $("#password").val();
+        var salt = g_passsword_salt;
+        var str = "" + salt.charAt(3) + salt.charAt(9) + input + salt.charAt(7) + salt.charAt(4);
+        var password = md5(str);
+
+        $.ajax({
+            url: "/login/doLogin",
+            type: "POST",
+            data: {
+                email: $("#email").val(),
+                password: password
+            },
+            success: function (data) {
+                layer.closeAll();
+                if (data.code == 200) {
+                    layer.msg("Success");
+                    console.log(data);
+                    document.cookie = "userTicket=" + data.object;
+                    window.location.href = "/goods/toList";
+                } else {
+                    layer.msg(data.message);
+                }
+            },
+            error: function () {
+                layer.closeAll();
+            }
+        });
+    }
+</script>
+
+</html>
