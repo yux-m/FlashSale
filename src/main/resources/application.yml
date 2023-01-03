@@ -6,9 +6,9 @@ spring:
   # datasource configuration
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/flashsale?useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/New_York
-    username: root
-    password: 000000
+    url: 'jdbc:mysql://localhost:3306/flashsale?useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/New_York'
+    username: 'root'
+    password: '000000'
     # default connector
     hikari:
       pool-name: HikariCP

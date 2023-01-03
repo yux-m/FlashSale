@@ -13,7 +13,6 @@ public class MD5utils {
 
     /**
      * Double-layer encryption with md5 hashing.
-     * The only method in this class to be called from other classes.
      *
      * @param input user input (password)
      * @param salt  random salt generated
@@ -51,7 +50,7 @@ public class MD5utils {
      * @param randomSalt random salt generated
      * @return encoded password
      */
-    private static String secondLayer(String received, String randomSalt) {
+    public static String secondLayer(String received, String randomSalt) {
         String salted = "" + randomSalt.charAt(3) + randomSalt.charAt(9) + received + randomSalt.charAt(7) + randomSalt.charAt(4);
         return md5(salted);
     }

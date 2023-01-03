@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("yuxm.flashsale")
+@MapperScan("yuxm.flashsale.mapper")
 public class FlashSaleApplication {
 
     public static void main(String[] args) {

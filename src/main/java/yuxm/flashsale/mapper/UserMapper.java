@@ -1,12 +1,10 @@
 package yuxm.flashsale.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import yuxm.flashsale.pojo.User;
+import yuxm.flashsale.entity.User;
 
 /**
- * <p>
  * User Table Mapper access
- * </p>
  *
  * @author yuxm
  */
