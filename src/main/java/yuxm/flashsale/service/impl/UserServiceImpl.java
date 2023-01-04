@@ -1,8 +1,7 @@
 package yuxm.flashsale.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import jakarta.annotation.Resource;
-import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yuxm.flashsale.entity.User;
 import yuxm.flashsale.mapper.UserMapper;
@@ -22,11 +21,11 @@ import javax.servlet.http.HttpServletResponse;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     @Override
-    public RespBean doLogin(@Valid LoginVO loginVO, HttpServletRequest request, HttpServletResponse response) {
+    public RespBean doLogin(LoginVO loginVO, HttpServletRequest request, HttpServletResponse response) {
         String email = loginVO.getEmail();
         String password = loginVO.getPassword();
 
