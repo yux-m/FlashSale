@@ -26,6 +26,17 @@ spring:
       auto-commit: true
       # test if connections work (are alive)
       connection-test-query: SELECT 1
+  # redis configuration
+  redis:
+    host: 192.168.10.100
+    timeout: 10000ms
+    lettuce:
+      # max-wait: default -1, unlimited
+      max-wait: 10000ms
+      # max-idle: default 8
+      max-idle: 200
+      # min-idle: default 0
+      min-idle: 5
 
 mybatis-plus:
   # mapper file

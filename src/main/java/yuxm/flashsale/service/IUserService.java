@@ -16,4 +16,5 @@ import javax.servlet.http.HttpServletResponse;
 public interface IUserService extends IService<User> {
 
     RespBean doLogin(LoginVO loginVO, HttpServletRequest request, HttpServletResponse response);
+
 }
