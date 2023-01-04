@@ -11,7 +11,7 @@ function g_showLoading() {
 }
 
 //salt, same as in MD5utils
-var g_passsword_salt = "4eilo8trk5"
+var second_layer_passsword_salt = "4eilo8trk5"
 
 //get url parameters
 function g_getQueryString(name) {

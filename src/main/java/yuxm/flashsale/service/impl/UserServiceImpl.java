@@ -1,6 +1,7 @@
 package yuxm.flashsale.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yuxm.flashsale.entity.User;
@@ -19,19 +20,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper userMapper;
 
     @Override
-    public RespBean doLogin(LoginVO loginVO) {
+    public RespBean doLogin(@Valid LoginVO loginVO) {
         String email = loginVO.getEmail();
         String password = loginVO.getPassword();
 
-        //check for empty input
-        if (email.isEmpty() || password.isEmpty()) return RespBean.error(RespBeanEnum.LOGIN_ERROR);
         //check if email address is valid
         if (!Validators.isEmailAddress(email)) return RespBean.error(RespBeanEnum.EMAIL_ERROR);
 
         //get user
         User user = userMapper.selectById(email);
         //if user not found
-        if (user == null) return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+        if (user == null) return RespBean.error(RespBeanEnum.USER_NOT_EXIST);
 
         //check if password is correct
         if (!MD5utils.secondLayer(password, user.getSalt()).equals(user.getPassword()))

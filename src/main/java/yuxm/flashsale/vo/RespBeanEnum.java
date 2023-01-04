@@ -8,10 +8,10 @@ public enum RespBeanEnum {
     //for login
     LOGIN_ERROR(500210, "Invalid email address and/or password"),
     EMAIL_ERROR(500211, "Invalid email address format"),
-    BIND_ERROR(500212, "Validation error"),
-    USER_NOT_EXIST(500213, "User not exist"),
-    PASSWORD_UPDATE_FAIL(500214, "Password update failed"),
-    SESSION_ERROR(500215, "SESSION not exist"),
+    USER_NOT_EXIST(500212, "User does not exist"),
+    PASSWORD_UPDATE_FAIL(500213, "Password update failed"),
+    SESSION_ERROR(500214, "SESSION not exist"),
+
 
     //for purchase
     EMPTY_STOCK(500500, "Empty Stock"),

@@ -1,5 +1,6 @@
 package yuxm.flashsale.vo;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -7,7 +8,9 @@ import lombok.Data;
  */
 @Data
 public class LoginVO {
+    @NotNull
     private String email;
+    @NotNull
     private String password;
 
     public String getEmail() {
