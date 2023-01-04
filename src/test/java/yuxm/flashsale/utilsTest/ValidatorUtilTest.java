@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static yuxm.flashsale.utils.Validators.isEmailAddress;
+import static yuxm.flashsale.utils.ValidatorUtil.isEmailAddress;
 
-public class ValidatorsTest {
+public class ValidatorUtilTest {
     @Test
     void isEmailAddressTest() {
         //valid cases

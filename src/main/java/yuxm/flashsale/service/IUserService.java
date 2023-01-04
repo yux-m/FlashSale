@@ -5,6 +5,9 @@ import yuxm.flashsale.entity.User;
 import yuxm.flashsale.vo.LoginVO;
 import yuxm.flashsale.vo.RespBean;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * User Table Service class
  *
@@ -12,5 +15,5 @@ import yuxm.flashsale.vo.RespBean;
  */
 public interface IUserService extends IService<User> {
 
-    RespBean doLogin(LoginVO loginVO);
+    RespBean doLogin(LoginVO loginVO, HttpServletRequest request, HttpServletResponse response);
 }

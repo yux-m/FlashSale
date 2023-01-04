@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Password encryption utils class.
  */
 @Component
-public class MD5utils {
+public class MD5Util {
 
     private static final String SALT = "4eilo8trk5";
 

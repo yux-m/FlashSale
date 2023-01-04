@@ -2,11 +2,11 @@ package yuxm.flashsale.utilsTest;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.api.Test;
-import yuxm.flashsale.utils.MD5utils;
+import yuxm.flashsale.utils.MD5Util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MD5utilsTest {
+public class MD5UtilTest {
     @Test
     void encryptTest() {
         //original password
@@ -23,6 +23,6 @@ public class MD5utilsTest {
         encrypted = DigestUtils.md5Hex(encrypted);
         System.out.println("                  " + encrypted);
         //check encrypted output
-        assertEquals(encrypted, MD5utils.encrypt(cleartext, randomSalt));
+        assertEquals(encrypted, MD5Util.encrypt(cleartext, randomSalt));
     }
 }

@@ -9,6 +9,9 @@ import yuxm.flashsale.service.IUserService;
 import yuxm.flashsale.vo.LoginVO;
 import yuxm.flashsale.vo.RespBean;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/login")
 @Slf4j
@@ -36,7 +39,7 @@ public class LoginController {
      */
     @RequestMapping("/doLogin")
     @ResponseBody
-    public RespBean doLogin(LoginVO loginVO) {
-        return userService.doLogin(loginVO);
+    public RespBean doLogin(LoginVO loginVO, HttpServletRequest request, HttpServletResponse response) {
+        return userService.doLogin(loginVO, request, response);
     }
 }
