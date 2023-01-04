@@ -2,6 +2,7 @@ package yuxm.flashsale.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import yuxm.flashsale.entity.User;
 import yuxm.flashsale.mapper.UserMapper;
@@ -23,6 +24,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public RespBean doLogin(LoginVO loginVO, HttpServletRequest request, HttpServletResponse response) {
@@ -49,4 +52,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         //if both valid and correct, return success bean
         return RespBean.success();
     }
+
+    @Override
+    public User getUserByCookie(String userTicket, HttpServletRequest request, HttpServletResponse response) {
+        if (userTicket.isEmpty()) {
+            return null;
+        }
+        User user = (User) redisTemplate.opsForValue().get("user:" + userTicket);
+        if (user != null) {
+            CookieUtil.setCookie(request, response, "userTicket", userTicket);
+        }
+        return user;
+    }
+
 }

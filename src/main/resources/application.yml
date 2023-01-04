@@ -28,7 +28,7 @@ spring:
       connection-test-query: SELECT 1
   # redis configuration
   redis:
-    host: 192.168.10.100
+    host: 127.0.0.1
     timeout: 10000ms
     lettuce:
       # max-wait: default -1, unlimited
