@@ -46,7 +46,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         //generate cookie
         String ticket = UUIDUtil.uuid();
-        request.getSession().setAttribute(ticket, user);
+        //save user info to redis (instead of session)
+        redisTemplate.opsForValue().set("user:" + ticket, user);
+//        request.getSession().setAttribute(ticket, user);
         CookieUtil.setCookie(request, response, "userTicket", ticket);
 
         //if both valid and correct, return success bean
@@ -58,6 +60,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (userTicket.isEmpty()) {
             return null;
         }
+        Object debug = redisTemplate.opsForValue();
         User user = (User) redisTemplate.opsForValue().get("user:" + userTicket);
         if (user != null) {
             CookieUtil.setCookie(request, response, "userTicket", userTicket);

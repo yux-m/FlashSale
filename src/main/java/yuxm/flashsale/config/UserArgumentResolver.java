@@ -9,12 +9,16 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import yuxm.flashsale.entity.User;
 import yuxm.flashsale.service.IUserService;
+import yuxm.flashsale.utils.CookieUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Autowired
-    private IUserService itUserService;
+    private IUserService userService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -24,7 +28,13 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        return UserContext.getUser();
+        HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
+        HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
+        String ticket = CookieUtil.getCookieValue(request, "userTicket");
+        if (ticket.isEmpty()) {
+            return null;
+        }
+        return userService.getUserByCookie(ticket, request, response);
     }
 
 }
