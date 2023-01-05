@@ -2,6 +2,9 @@ package yuxm.flashsale.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import yuxm.flashsale.entity.Product;
+import yuxm.flashsale.vo.ProductVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import yuxm.flashsale.entity.Product;
  */
 public interface ProductMapper extends BaseMapper<Product> {
 
+    List<ProductVO> findProductVO();
 }

@@ -2,6 +2,9 @@ package yuxm.flashsale.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import yuxm.flashsale.entity.Product;
+import yuxm.flashsale.vo.ProductVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import yuxm.flashsale.entity.Product;
  */
 public interface IProductService extends IService<Product> {
 
+    List<ProductVO> findProductVO();
 }
