@@ -34,7 +34,7 @@ public class Order implements Serializable {
     /**
      * userID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * productID

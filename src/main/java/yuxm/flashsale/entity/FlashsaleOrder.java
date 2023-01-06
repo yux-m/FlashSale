@@ -29,7 +29,7 @@ public class FlashsaleOrder implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Long userId;
+    private String userId;
 
     private Long orderId;
 

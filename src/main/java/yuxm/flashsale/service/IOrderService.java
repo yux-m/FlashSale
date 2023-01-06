@@ -2,6 +2,8 @@ package yuxm.flashsale.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import yuxm.flashsale.entity.Order;
+import yuxm.flashsale.entity.User;
+import yuxm.flashsale.vo.ProductVO;
 
 /**
  * <p>
@@ -13,4 +15,8 @@ import yuxm.flashsale.entity.Order;
  */
 public interface IOrderService extends IService<Order> {
 
+
+    Order createOrder(User user, ProductVO productVO);
+
+    Order findOrderByOrderId(Long orderId);
 }

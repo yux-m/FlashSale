@@ -23,4 +23,20 @@
         , user_id, product_id, delivery_addr_id, product_name, product_count, product_price, order_channel, status, create_date, payment_date
     </sql>
 
+    <select id="findOrderByOrderId" resultType="yuxm.flashsale.entity.Order">
+        SELECT id,
+               user_id,
+               product_id,
+               delivery_addr_id,
+               product_name,
+               product_count,
+               product_price,
+               order_channel,
+               status,
+               create_date,
+               payment_date
+        FROM t_order
+        WHERE id = #{orderId}
+    </select>
+
 </mapper>

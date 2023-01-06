@@ -13,4 +13,5 @@ import yuxm.flashsale.entity.Order;
  */
 public interface OrderMapper extends BaseMapper<Order> {
 
+    Order findOrderByOrderId(Long orderId);
 }
