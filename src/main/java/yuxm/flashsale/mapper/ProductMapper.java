@@ -16,5 +16,17 @@ import java.util.List;
  */
 public interface ProductMapper extends BaseMapper<Product> {
 
+    /**
+     * Find all products on sale. See ProductMapper.xml for SQL commands.
+     *
+     * @return List<ProductVO>
+     */
     List<ProductVO> findProductVO();
+
+    /**
+     * Find a product by id. See ProductMapper.xml for SQL commands.
+     *
+     * @return the ProductVO target
+     */
+    ProductVO findProductVoByProductId(Long productId);
 }

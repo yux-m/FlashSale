@@ -16,5 +16,17 @@ import java.util.List;
  */
 public interface IProductService extends IService<Product> {
 
+    /**
+     * Find all products on sale.
+     *
+     * @return List<ProductVO>
+     */
     List<ProductVO> findProductVO();
+
+    /**
+     * Find a product by id.
+     *
+     * @return the ProductVO target
+     */
+    ProductVO findProductVoByProductId(Long productId);
 }

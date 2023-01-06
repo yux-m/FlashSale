@@ -3,7 +3,7 @@
 <mapper namespace="yuxm.flashsale.mapper.FlashsaleOrderMapper">
 
     <!-- mapping results -->
-    <resultMap id="BaseResultMap" type="yuxm.flashsale.pojo.FlashsaleOrder">
+    <resultMap id="BaseResultMap" type="yuxm.flashsale.entity.FlashsaleOrder">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="order_id" property="orderId"/>

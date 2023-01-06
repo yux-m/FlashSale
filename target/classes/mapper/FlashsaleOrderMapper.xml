@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yuxm.flashsale.mapper.FlashsaleOrderMapper">
+
+    <!-- mapping results -->
+    <resultMap id="BaseResultMap" type="yuxm.flashsale.entity.FlashsaleOrder">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="product_id" property="productId"/>
+    </resultMap>
+
+    <!-- result list -->
+    <sql id="Base_Column_List">
+        id
+        , user_id, order_id, product_id
+    </sql>
+
+</mapper>

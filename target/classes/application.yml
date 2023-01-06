@@ -37,6 +37,7 @@ spring:
       max-idle: 200
       # min-idle: default 0
       min-idle: 5
+    password: project2023
 
 mybatis-plus:
   # mapper file

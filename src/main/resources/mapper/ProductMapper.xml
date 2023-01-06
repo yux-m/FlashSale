@@ -3,7 +3,7 @@
 <mapper namespace="yuxm.flashsale.mapper.ProductMapper">
 
     <!-- mapping results -->
-    <resultMap id="BaseResultMap" type="yuxm.flashsale.pojo.Product">
+    <resultMap id="BaseResultMap" type="yuxm.flashsale.entity.Product">
         <id column="id" property="id"/>
         <result column="product_name" property="productName"/>
         <result column="product_title" property="productTitle"/>
@@ -13,12 +13,13 @@
         <result column="product_stock" property="productStock"/>
     </resultMap>
 
-    <!-- get product list -->
+
     <select id="findProductVO" resultType="yuxm.flashsale.vo.ProductVO">
         SELECT p.id,
                p.product_name,
                p.product_title,
                p.product_img,
+               p.product_detail,
                p.product_price,
                p.product_stock,
                sale.flashsale_price,
@@ -27,6 +28,23 @@
                sale.end_date
         FROM t_product p
                  LEFT JOIN t_flashsale_product sale on p.id = sale.product_id
+    </select>
+
+    <select id="findProductVoByProductId" resultType="yuxm.flashsale.vo.ProductVO">
+        SELECT p.id,
+               p.product_name,
+               p.product_title,
+               p.product_img,
+               p.product_detail,
+               p.product_price,
+               p.product_stock,
+               sale.flashsale_price,
+               sale.stock_count,
+               sale.start_date,
+               sale.end_date
+        FROM t_product p
+                 LEFT JOIN t_flashsale_product sale on p.id = sale.product_id
+        WHERE p.id = #{productId}
     </select>
 
 </mapper>
