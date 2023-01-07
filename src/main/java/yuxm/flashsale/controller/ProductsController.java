@@ -25,14 +25,6 @@ public class ProductsController {
      */
     @RequestMapping("/toList")
     public String toList(Model model, User user) {
-//        if (ticket.isEmpty()) {
-//            return "login";
-//        }
-//        User user = userService.getUserByCookie(ticket, request, response);
-//        //User user = (User) session.getAttribute(ticket);
-//        if (user == null) {
-//            return "login";
-//        }
         model.addAttribute("user", user);
         model.addAttribute("productList", productService.findProductVO());
         return "productList";

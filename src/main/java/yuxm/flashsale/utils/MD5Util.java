@@ -38,7 +38,7 @@ public class MD5Util {
      * @param input input
      * @return encoded password
      */
-    private static String firstLayer(String input) {
+    public static String firstLayer(String input) {
         String salted = "" + SALT.charAt(3) + SALT.charAt(9) + input + SALT.charAt(7) + SALT.charAt(4);
         return md5(salted);
     }

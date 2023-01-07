@@ -52,12 +52,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         CookieUtil.setCookie(request, response, "userTicket", ticket);
 
         //if both valid and correct, return success bean
-        return RespBean.success();
+        return RespBean.success(ticket);
     }
 
     @Override
     public User getUserByCookie(String userTicket, HttpServletRequest request, HttpServletResponse response) {
-        if (userTicket.isEmpty()) {
+        if (userTicket == null || userTicket.isEmpty()) {
             return null;
         }
         Object debug = redisTemplate.opsForValue();
