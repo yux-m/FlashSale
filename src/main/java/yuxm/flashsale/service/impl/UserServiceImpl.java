@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import yuxm.flashsale.entity.User;
+import yuxm.flashsale.exception.GlobalException;
 import yuxm.flashsale.mapper.UserMapper;
 import yuxm.flashsale.service.IUserService;
 import yuxm.flashsale.utils.CookieUtil;
@@ -66,6 +67,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             CookieUtil.setCookie(request, response, "userTicket", userTicket);
         }
         return user;
+    }
+
+    @Override
+    public RespBean updatePassword(String userTicket, String password, HttpServletRequest request, HttpServletResponse response) {
+        User user = getUserByCookie(userTicket, request, response);
+        if (user == null) throw new GlobalException(RespBeanEnum.USER_NOT_EXIST);
+        //update password
+        user.setPassword(MD5Util.secondLayer(password, user.getSalt()));
+        int res = userMapper.updateById(user);
+        //ensured cache consistency by cache invalidation
+        if (res == 1) {
+            //delete cache in redis
+            redisTemplate.delete("user:" + userTicket);
+            return RespBean.success();
+        }
+        return RespBean.error(RespBeanEnum.PASSWORD_UPDATE_FAIL);
     }
 
 }
