@@ -1,10 +1,14 @@
 package yuxm.flashsale.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import yuxm.flashsale.entity.*;
+import yuxm.flashsale.entity.FlashsaleOrder;
+import yuxm.flashsale.entity.FlashsaleProduct;
+import yuxm.flashsale.entity.Order;
+import yuxm.flashsale.entity.User;
 import yuxm.flashsale.mapper.OrderMapper;
 import yuxm.flashsale.service.IFlashsaleOrderService;
 import yuxm.flashsale.service.IFlashsaleProductService;
@@ -40,10 +44,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         //update stock
         FlashsaleProduct flashsaleProduct = flashsaleProductService.getOne(new QueryWrapper<FlashsaleProduct>().eq("product_id", productVO.getId()));
         flashsaleProduct.setStockCount(flashsaleProduct.getStockCount() - 1);
-        flashsaleProductService.updateById(flashsaleProduct);
-        Product product = productService.findProductVoByProductId(productVO.getId());
-        product.setProductStock(product.getProductStock() - 1);
-        productService.updateById(product);
+        //ensure that stock for sale is enough
+        boolean result = flashsaleProductService.update(new UpdateWrapper<FlashsaleProduct>().set("stock_count", flashsaleProduct.getStockCount()).eq("id", flashsaleProduct.getId()).gt("stock_count", 0));
+        //check if stock updated successfully
+        if (!result) return null;
         //new order
         Order order = new Order();
         order.setUserId(user.getId());
