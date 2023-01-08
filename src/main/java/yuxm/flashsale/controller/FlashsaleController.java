@@ -73,18 +73,6 @@ public class FlashsaleController implements InitializingBean {
         //add in queue and wait for receiver to process
         mqSender.sendFlashsaleMessage(JsonUtil.object2JsonStr(flashsaleMessage));
 
-//        ProductVO productVO = productService.findProductVoByProductId(productId);
-//        //stock check
-//        if (productVO.getStockCount() < 1 && productVO.getStockCount() != -1) {
-//            //error message
-//            model.addAttribute("errmsg", RespBeanEnum.EMPTY_STOCK.getMessage());
-//            return "purchaseFail";
-//        }
-//        //create order
-//        Order order = orderService.createOrder(user, productVO);
-//        model.addAttribute("order", order);
-//        model.addAttribute("product", productVO);
-
         return RespBean.success(0);
 
     }
