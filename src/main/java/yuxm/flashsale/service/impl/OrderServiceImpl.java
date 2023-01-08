@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import yuxm.flashsale.entity.FlashsaleOrder;
 import yuxm.flashsale.entity.FlashsaleProduct;
@@ -38,6 +39,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private IFlashsaleOrderService flashsaleOrderService;
     @Autowired
     private IProductService productService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public Order createOrder(User user, ProductVO productVO) {
@@ -60,6 +63,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setStatus(0);
         order.setCreateDate(new Date());
         orderMapper.insert(order);
+        redisTemplate.opsForValue().set("order:" + user.getId() + ":" + productVO.getId(), order);
         //new sale order
         FlashsaleOrder flashsaleOrder = new FlashsaleOrder();
         flashsaleOrder.setUserId(user.getId());

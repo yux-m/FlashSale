@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import yuxm.flashsale.entity.User;
-import yuxm.flashsale.vo.RespBean;
+import yuxm.flashsale.rabbitmq.MQSender;
 import yuxm.flashsale.service.IUserService;
+import yuxm.flashsale.vo.RespBean;
 
 /**
  * <p>
@@ -20,6 +21,11 @@ import yuxm.flashsale.service.IUserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
+    IUserService userService;
+    @Autowired
+    private MQSender mqSender;
 
     /**
      * Request for user info. For load testing.
@@ -33,9 +39,6 @@ public class UserController {
         return RespBean.success(user);
     }
 
-    @Autowired
-    IUserService userService;
-
     @RequestMapping("/toUpdatePassword")
     public String toUpdatePassword() {
         //
@@ -47,5 +50,14 @@ public class UserController {
         //
         return "login"; //redirect to login page
     }
+
+//    /**
+//     * For mq testing
+//     */
+//    @RequestMapping(value = "/mq")
+//    @ResponseBody
+//    public void mq() {
+//        mqSender.send("Hello");
+//    }
 
 }

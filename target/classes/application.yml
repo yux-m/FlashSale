@@ -39,6 +39,38 @@ spring:
       min-idle: 5
     password: project2023
 
+#RabbitMQ
+rabbitmq:
+  host: 127.0.0.1
+  username: guest
+  password: guest
+  port: 5672
+  listener:
+    simple:
+      # minimum #customers
+      concurrency: 10
+      # maximum #customers
+      max-concurrency: 10
+      # process 1 message per time
+      prefetch: 1
+      # default
+      auto-startup: true
+      # requeue when rejected
+      default-requeue-rejected: true
+  template:
+    retry:
+      # retry enabled (default: false)
+      enabled: true
+      # default 1000ms
+      initial-interval: 1000ms
+      # maximum number of retry attempts, default 3 times
+      max-attempts: 3
+      # maximum interval of retries
+      max-interval: 10000ms
+      # example: if multiplier=2, first interval=10s, second interval=20s, third interval=40s
+      multiplier: 1
+
+
 mybatis-plus:
   # mapper file
   mapper-locations:

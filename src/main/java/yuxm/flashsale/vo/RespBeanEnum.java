@@ -14,11 +14,10 @@ public enum RespBeanEnum {
 
 
     //for purchase
-    EMPTY_STOCK(500500, "Empty Stock"),
-    REPEATE_ERROR(500501, "Exceeds maximum products per user"),
-    REQUEST_ILLEGAL(500502, "Illegal Request"),
-    ERROR_CAPTCHA(500503, "Verification failed, please re-verify"),
-    ACCESS_LIMIT_REACHED(500504, "Too many requests, please try again later"),
+    EMPTY_STOCK(500500, "Purchase failed: Sold out!"),
+    REQUEST_ILLEGAL(500501, "Illegal Request"),
+    ERROR_CAPTCHA(500502, "Verification failed, please re-verify"),
+    ACCESS_LIMIT_REACHED(500503, "Too many requests, please try again later"),
 
     //for orders
     ORDER_NOT_EXIST(500300, "Order not exist"),
