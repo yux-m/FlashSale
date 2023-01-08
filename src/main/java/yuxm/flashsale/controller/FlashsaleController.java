@@ -141,14 +141,17 @@ public class FlashsaleController implements InitializingBean {
         }
     }
 
-    @RequestMapping("/checkout")
-    public String checkout(Model model, User user) {
-        int i = 0;
+    @RequestMapping("/checkout/{productId}")
+    public String checkout(Model model, User user, @PathVariable Long productId) {
+        if (user == null) throw new GlobalException(RespBeanEnum.SESSION_ERROR);
+        model.addAttribute("user", user);
+        //get productVO
+        ProductVO productVO = productService.findProductVoByProductId(productId);
+        model.addAttribute("product", productVO);
+        //get order from redis
+        Order order = (Order) redisTemplate.opsForValue().get("order:" + user.getId() + ":" + productId);
+        model.addAttribute("order", order);
         return "checkout";
     }
 
-    @RequestMapping("/purchaseFail")
-    public String purchaseFail() {
-        return "purchaseFail";
-    }
 }

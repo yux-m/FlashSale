@@ -393,12 +393,22 @@
                             getResult(productId)
                         }, 50);
                     } else {    //order placed successfully, direct to checkout
-                        window.location.href = "/flashsale/checkout";
+                        window.location.href = "/flashsale/checkout/" + productId;
                     }
                 }
             },
             error: function () {
                 layer.msg("Request Error: get purchase result");
+            }
+        });
+    }
+
+    function toCheckout(productId) {
+        $.ajax({
+            url: "/flashsale/checkout",
+            type: "POST",
+            data: {
+                productId: productId
             }
         });
     }
