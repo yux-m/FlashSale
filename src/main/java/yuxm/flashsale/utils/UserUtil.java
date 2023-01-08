@@ -103,6 +103,12 @@ public class UserUtil {
         return DriverManager.getConnection(url, username, password);
     }
 
+    /**
+     * Helper for load testing. Generate {count} users, insert to database and create userTickets.
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         createUsers(1500);
     }
