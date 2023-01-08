@@ -1,6 +1,6 @@
 package yuxm.flashsale.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,6 +18,7 @@ import yuxm.flashsale.exception.GlobalException;
 import yuxm.flashsale.rabbitmq.MQSender;
 import yuxm.flashsale.service.IOrderService;
 import yuxm.flashsale.service.IProductService;
+import yuxm.flashsale.utils.JsonUtil;
 import yuxm.flashsale.vo.ProductVO;
 import yuxm.flashsale.vo.RespBean;
 import yuxm.flashsale.vo.RespBeanEnum;
@@ -27,10 +28,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Controller
 @RequestMapping("/flashsale")
 public class FlashsaleController implements InitializingBean {
 
+    /**
+     * A map to track whether a product's stock is empty, to reduce communication with Redis.
+     * Key: (Long) productId
+     * Value: (Boolean) stock is not empty
+     */
+    private final Map<Long, Boolean> emptyStockMap = new HashMap<>();
     @Autowired
     IProductService productService;
     @Autowired
@@ -40,22 +48,14 @@ public class FlashsaleController implements InitializingBean {
     @Autowired
     MQSender mqSender;
 
-    /**
-     * A map to track whether a product's stock is empty, to reduce communication with Redis.
-     * Key: (Long) productId
-     * Value: (Boolean) stock is not empty
-     */
-    private Map<Long, Boolean> emptyStockMap = new HashMap<>();
-
-
     @RequestMapping(value = "/purchase", method = RequestMethod.POST)
     @ResponseBody
-    public RespBean purchase(Model model, User user, Long productId) throws Exception {
+    public RespBean purchase(Model model, User user, Long productId) {
         if (user == null) return RespBean.error(RespBeanEnum.SESSION_ERROR);
         model.addAttribute("user", user);
         model.addAttribute("productId", productId);
 
-        //stock status check
+        //stock status check, to reduce redis communication
         if (emptyStockMap.get(productId)) return RespBean.error(RespBeanEnum.EMPTY_STOCK);
 
         //attempt to decrease stock in Redis
@@ -70,9 +70,8 @@ public class FlashsaleController implements InitializingBean {
         }
 
         FlashsaleMessage flashsaleMessage = new FlashsaleMessage(user, productId);
-        ObjectMapper objectMapper = new ObjectMapper();
         //add in queue and wait for receiver to process
-        mqSender.sendFlashsaleMessage(objectMapper.writeValueAsString(flashsaleMessage));
+        mqSender.sendFlashsaleMessage(JsonUtil.object2JsonStr(flashsaleMessage));
 
 //        ProductVO productVO = productService.findProductVoByProductId(productId);
 //        //stock check
@@ -128,7 +127,7 @@ public class FlashsaleController implements InitializingBean {
      * @throws Exception
      */
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         List<ProductVO> list = productService.findProductVO();
         if (list.isEmpty()) {
             return;
@@ -136,7 +135,7 @@ public class FlashsaleController implements InitializingBean {
         for (ProductVO productVO : list) {
             redisTemplate.opsForValue().set("flashsaleProduct" + productVO.getId(), productVO.getStockCount());
             //initialize empty_stock status
-            if (productVO.getStockCount() > 0 || productVO.getStockCount() == -1) {
+            if (productVO.getStockCount() > 0) {
                 emptyStockMap.put(productVO.getId(), false);
             } else emptyStockMap.put(productVO.getId(), true);
         }

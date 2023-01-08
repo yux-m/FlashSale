@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -84,7 +85,7 @@ public class ProductsController {
 //        return "productDetail";
 //    }
 
-    @RequestMapping(value = "/toDetail/{productId}", produces = "text/html; charset=utf-8")
+    @RequestMapping(value = "/toDetail/{productId}", produces = "text/html; charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
     public String toDetail(Model model, User user, @PathVariable Long productId, HttpServletRequest request, HttpServletResponse response) {
         ValueOperations valueOperations = redisTemplate.opsForValue();

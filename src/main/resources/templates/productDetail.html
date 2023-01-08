@@ -231,11 +231,12 @@
                 <br>
 
                 <div class="purchase-section">
-                    <form action="/flashsale/purchase" id="purchaseForm" method="post">
-                        <button class="btn btn-danger btn-lg btn-block" id="buyButton" onclick="purchase()"
-                                type="submit">Buy now<input name="productId" th:value="${product.id}" type="hidden">
-                        </button>
-                    </form>
+
+                    <button class="btn btn-danger btn-lg btn-block" id="buyButton" onclick="purchase()"
+                            type="submit">Buy now
+                        <input id="productId" name="productId" th:value="${product.id}" type="hidden">
+                    </button>
+
                 </div>
             </div>
 
@@ -353,20 +354,22 @@
     };
 
     function purchase() {
+        var productId = $("#productId").val();
         $.ajax({
-            url: 'flashsale/purchase',
+            url: '/flashsale/purchase',
             type: "POST",
             data: {
-                productId: $('#productId').val()
+                productId: productId
             },
             success: function (data) {
                 if (data.code == 200) {
-                    getResult($("#productId").val());
+                    getResult(productId);
                 } else {
                     layer.msg(data.message);
                 }
-            }, error: function () {
-                layer.msg("Request Error");
+            },
+            error: function () {
+                layer.msg("Request Error: purchase");
             }
 
         });
@@ -388,14 +391,14 @@
                     } else if (result == 0) {   //still in line
                         setTimeout(function () {
                             getResult(productId)
-                        });
+                        }, 50);
                     } else {    //order placed successfully, direct to checkout
                         window.location.href = "/flashsale/checkout";
                     }
                 }
             },
             error: function () {
-                layer.msg("Request Error");
+                layer.msg("Request Error: get purchase result");
             }
         });
     }
