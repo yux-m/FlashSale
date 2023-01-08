@@ -54,6 +54,36 @@ public class ProductsController {
         return html;
     }
 
+//    @RequestMapping(value = "/toDetail/{productId}")
+//    public String toDetail(Model model, User user, @PathVariable Long productId) {
+//        model.addAttribute("user", user);
+//        ProductVO productVO = productService.findProductVoByProductId(productId);
+//        Date startDate = productVO.getStartDate();
+//        Date endDate = productVO.getEndDate();
+//        Date nowDate = new Date();
+//        //status
+//        int flashsaleStatus = 0;
+//        //count down
+//        int remainSeconds = 0;
+//
+//        if (nowDate.before(startDate)) {
+//            //not yet started
+//            remainSeconds = (int) ((startDate.getTime() - nowDate.getTime()) / 1000);
+//        } else if (nowDate.after(endDate)) {
+//            //expired
+//            flashsaleStatus = 2;
+//            remainSeconds = -1;
+//        } else {
+//            //on sale
+//            flashsaleStatus = 1;
+//            remainSeconds = 0;
+//        }
+//        model.addAttribute("remainSeconds", remainSeconds);
+//        model.addAttribute("product", productVO);
+//        model.addAttribute("flashsaleStatus", flashsaleStatus);
+//        return "productDetail";
+//    }
+
     @RequestMapping(value = "/toDetail/{productId}", produces = "text/html; charset=utf-8")
     @ResponseBody
     public String toDetail(Model model, User user, @PathVariable Long productId, HttpServletRequest request, HttpServletResponse response) {
