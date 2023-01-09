@@ -88,7 +88,16 @@ In this project, I used @ControllerAdvice and @ExceptionHandler annotations to c
 
 ### Purcahse
 
-# TODO: upload logic flowchart of purchase services.
+<img width="874" alt="Purchase" src="https://user-images.githubusercontent.com/109834466/211363372-cff96b5e-39ce-46c4-9db5-13b42ddae4d0.png">
+
+#### Stock Check & Update:
+
+1. Check on server: 
+    - Keep track of stock statuses (empty/not) on server to reduce communication with Redis; if status is empty, skip following steps.
+2. Check and update on Redis: 
+    - Pre-decrement stock on Redis to check if stock is enough; if not, add it back, update status on server, and skip following steps.
+3. Update on database: 
+    - Send message to queue and wait for new order created, where OrderService will update product stock in database.
 
 <h3 align="center"> Improvements made during development </h3>
 
