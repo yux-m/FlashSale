@@ -22,15 +22,15 @@
 ## Table of Contents
 * [Structure](#Structure)
 * [Sudo DevLog](#Sudo-DevLog)
-  + [Login & Register](#Login--Register)
-  + [Listing & Detail Pages](#Listing--Detail-Pages)
-  + [Purchase](#Purchase)
-  + [Improvements & Load Tests](#Improvements--Load-Tests)
+  + [Login & Register](#Login--Register) ✅
+  + [Listing & Detail Pages](#Listing--Detail-Pages) ✅
+  + [Purchase](#Purchase) ✅
+  + [Improvements & Load Tests](#Improvements--Load-Tests) ✅
 
 
 ## Structure 
 
-# TODO
+# TODO: upload overall structure chart
 
 ## Sudo DevLog 
 
@@ -72,11 +72,11 @@ In this project, I used @ControllerAdvice and @ExceptionHandler annotations to c
 
 ### Listing & Detail Pages
 
-# TODO
+# TODO: upload logic flowchart of product services.
 
 ### Purcahse
 
-# TODO
+# TODO: upload logic flowchart of purchase services.
 
 <h3 align="center"> Improvements made during development </h3>
 
@@ -84,4 +84,4 @@ Improvements have already been included in structure charts in above section. In
 
 ### Improvements & Load Tests
 
-# TODO
+# TODO: upload load test results before and after improvements.
