@@ -93,11 +93,11 @@ In this project, I used @ControllerAdvice and @ExceptionHandler annotations to c
 #### Stock Check & Update:
 
 1. Check on server: 
-    - Keep track of stock statuses (empty/not) on server to reduce communication with Redis; if status is empty, skip following steps.
+    - Keep track of stock status flags (empty/not) on server to reduce communication with Redis; if status is empty, skip following steps.
 2. Check and update on Redis: 
     - Pre-decrement stock on Redis to check if stock is enough; if not, add it back, update status on server, and skip following steps.
 3. Update on database: 
-    - Send message to queue and wait for new order created, where OrderService will update product stock in database.
+    - Send message to queue and wait for processing, where OrderService will update product stock in database when creating new order.
 
 <h3 align="center"> Improvements made during development </h3>
 
@@ -105,4 +105,24 @@ Improvements have already been included in structure charts in above section. In
 
 ### Improvements & Load Tests
 
-# TODO: upload load test results before and after improvements.
+#### Key improvements during the development process:
+
+1. Caching pages and objects.
+2. Minimize #requests to Redis and database.
+3. Implement a message queue to improved spike handling through asynchronous communication.
+
+#### Load Test Result: before improvements:
+
+<img width="1079" alt="load test before improve" src="https://user-images.githubusercontent.com/109834466/211380593-7b29950d-1d7f-4e79-9fe2-c2c982b8cac0.png">
+
+
+#### Load Test Result: after improvements:
+
+<img width="1082" alt="load test after improvement" src="https://user-images.githubusercontent.com/109834466/211380647-2224b4be-fcba-4192-9a55-d451e47cf679.png">
+
+* As shown above, there has been significant increase in throughput and decrease in response time.
+
+<img width="1056" alt="message queue " src="https://user-images.githubusercontent.com/109834466/211381327-2660595f-938b-42ec-ace1-171070e8ac3f.png">
+
+* With message queue implemented, the system perfectly managed data spikes (shown as the yellow line) and maintained steady processing (shown as the green line), ensuring that the data is persisted and handled.
+
