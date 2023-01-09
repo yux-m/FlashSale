@@ -39,7 +39,7 @@
 
 ### Login & Register
 
-<img width="1123" alt="LoginRegister Flowchart" src="https://user-images.githubusercontent.com/109834466/211227235-59339dde-2758-46e9-826c-f75b4670ec4a.png">
+<img width="977" alt="LoginRegister Flowchart" src="https://user-images.githubusercontent.com/109834466/211333269-54a3b7a0-d746-4502-be1e-1c7dface9af5.png">
 
 #### Distributed Session: 
 To support distribution, single session is no enough:
@@ -66,13 +66,25 @@ In this project, I used @ControllerAdvice and @ExceptionHandler annotations to c
   
 3. Password Update: 
 
-    + Similar roadmap as Login/Register. Delete cache in Redis after update password in database to ensure cache consistency.
+    + Similar roadmap as Login/Register, with UserController and UserService. 
+    + Delete cache in Redis after update password in database to ensure cache consistency.
 
 
 
 ### Listing & Detail Pages
 
-# TODO: upload logic flowchart of product services.
+<img width="830" alt="Listing   Detail" src="https://user-images.githubusercontent.com/109834466/211340537-e59aca37-97e9-4d4a-8546-054bae7a082a.png">
+
+#### Some Details:
+
+1. Listing:
+
+    - Iterative blocks with Thymeleaf for list of products.
+
+2. Deal Period Validation:
+
+    - Backend: Initialize deal status and countdown variable based on current server's time when fetching sales data from database.
+    - Frontend: Conditional function based on deal status and countdown function with timeout.
 
 ### Purcahse
 
