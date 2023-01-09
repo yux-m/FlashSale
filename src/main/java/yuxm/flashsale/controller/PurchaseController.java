@@ -31,7 +31,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @RequestMapping("/flashsale")
-public class FlashsaleController implements InitializingBean {
+public class PurchaseController implements InitializingBean {
 
     /**
      * A map to track whether a product's stock is empty, to reduce communication with Redis.
