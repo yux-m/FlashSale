@@ -19,20 +19,24 @@
 
 </p>
 
+
 ## Table of Contents
-* [Structure](#Structure)
-* [Sudo DevLog](#Sudo-DevLog)
-  + [Login & Register](#Login--Register) ✅
-  + [Listing & Detail Pages](#Listing--Detail-Pages) ✅
-  + [Purchase](#Purchase) ✅
-  + [Improvements & Load Tests](#Improvements--Load-Tests) ✅
+
+* [Structure Overview](#structure-overview)
+* [Introduction](#introduction)
+  + [Login & Register](#login--register) ✅
+  + [Listing & Detail Pages](#listing--detail-pages) ✅
+  + [Purchase](#purchase) ✅
+  + [Improvements & Load Tests](#improvements--load-tests) ✅
+* [DevLog: Feature Updates](#devlog-feature-updates)
 
 
-## Structure 
 
-# TODO: upload overall structure chart
+## Structure Overview
 
-## Sudo DevLog 
+# TODO
+
+## Introduction 
 
 <h3 align="center"> Function Development </h3>
 
@@ -86,7 +90,7 @@ In this project, I used @ControllerAdvice and @ExceptionHandler annotations to c
     - Backend: Initialize deal status and countdown variable based on current server's time when fetching sales data from database.
     - Frontend: Conditional function based on deal status and countdown function with timeout.
 
-### Purcahse
+### Purchase
 
 <img width="874" alt="Purchase" src="https://user-images.githubusercontent.com/109834466/211363372-cff96b5e-39ce-46c4-9db5-13b42ddae4d0.png">
 
@@ -126,3 +130,7 @@ Improvements have already been included in structure charts in above section. In
 
 * With message queue implemented, the system perfectly managed data spikes (shown as the yellow line) and maintained steady processing (shown as the green line), ensuring that the data is persisted and handled.
 
+
+
+## DevLog: Feature Updates
+(In progress)
