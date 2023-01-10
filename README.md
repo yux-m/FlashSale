@@ -115,12 +115,12 @@ Improvements have already been included in structure charts in above section. In
 2. Minimize #requests to Redis and database.
 3. Implement a message queue to improved spike handling through asynchronous communication.
 
-#### Load Test Result: before improvements:
+#### Load Test Result: before improvements
 
 <img width="1079" alt="load test before improve" src="https://user-images.githubusercontent.com/109834466/211380593-7b29950d-1d7f-4e79-9fe2-c2c982b8cac0.png">
 
 
-#### Load Test Result: after improvements:
+#### Load Test Result: after improvements
 
 <img width="1082" alt="load test after improvement" src="https://user-images.githubusercontent.com/109834466/211380647-2224b4be-fcba-4192-9a55-d451e47cf679.png">
 
