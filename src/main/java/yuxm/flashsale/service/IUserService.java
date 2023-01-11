@@ -21,4 +21,8 @@ public interface IUserService extends IService<User> {
 
     RespBean updatePassword(String userTicket, String password, HttpServletRequest request, HttpServletResponse response);
 
+
+    RespBean confirmPassword(String password, String repeat);
+
+    boolean passwordInvalid(String password);
 }

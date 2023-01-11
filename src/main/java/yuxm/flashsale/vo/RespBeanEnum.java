@@ -12,6 +12,9 @@ public enum RespBeanEnum {
     PASSWORD_UPDATE_FAIL(500213, "Password update failed"),
     SESSION_ERROR(500214, "SESSION not exist"),
 
+    //for password
+    PASSWORD_FORMAT_ERROR(500400, "Must contain at least 6 characters"),
+    PASSWORD_MATCH_ERROR(500401, "Password don't match"),
 
     //for purchase
     EMPTY_STOCK(500500, "Purchase failed: Sold out!"),

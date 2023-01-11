@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import yuxm.flashsale.entity.User;
 import yuxm.flashsale.rabbitmq.MQSender;
 import yuxm.flashsale.service.IUserService;
+import yuxm.flashsale.utils.CookieUtil;
 import yuxm.flashsale.vo.RespBean;
+import yuxm.flashsale.vo.RespBeanEnum;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <p>
@@ -41,14 +46,23 @@ public class UserController {
 
     @RequestMapping("/toUpdatePassword")
     public String toUpdatePassword() {
-        //
         return "updatePassword";    //direct to page for password updating called "updatePassword.html"
     }
 
     @RequestMapping("/doUpdatePassword")
-    public String doUpdatePassword() {
+    public RespBean doUpdatePassword(String newPassword, HttpServletRequest request, HttpServletResponse response) {
         //
-        return "login"; //redirect to login page
+        String ticket = CookieUtil.getCookieValue(request, "userTicket");
+        if (ticket == null || ticket.isEmpty()) {
+            return RespBean.error(RespBeanEnum.SESSION_ERROR);
+        }
+        return userService.updatePassword(ticket, newPassword, request, response);
+        //redirect to login page in html jquery function
+    }
+
+    @RequestMapping("/confirmPassword")
+    public RespBean confirmPassword(String password, String repeat) {
+        return userService.confirmPassword(password, repeat);
     }
 
 //    /**

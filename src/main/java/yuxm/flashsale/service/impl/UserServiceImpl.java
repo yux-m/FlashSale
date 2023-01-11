@@ -28,6 +28,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Autowired
     private RedisTemplate redisTemplate;
 
+    /**
+     * Login function implementation.
+     * Verify given account id (email) and password. If verification suceeds, generate and save cookie (userTicket).
+     *
+     * @param loginVO
+     * @param request
+     * @param response
+     * @return
+     */
     @Override
     public RespBean doLogin(LoginVO loginVO, HttpServletRequest request, HttpServletResponse response) {
         String email = loginVO.getEmail();
@@ -69,6 +78,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return user;
     }
 
+    /**
+     * Update password for current user.
+     *
+     * @param userTicket
+     * @param password
+     * @param request
+     * @param response
+     * @return
+     */
     @Override
     public RespBean updatePassword(String userTicket, String password, HttpServletRequest request, HttpServletResponse response) {
         User user = getUserByCookie(userTicket, request, response);
@@ -83,6 +101,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return RespBean.success();
         }
         return RespBean.error(RespBeanEnum.PASSWORD_UPDATE_FAIL);
+    }
+
+    /**
+     * Check if new password is valid and if two passwords are the same.
+     *
+     * @param password
+     * @param repeat
+     * @return
+     */
+    @Override
+    public RespBean confirmPassword(String password, String repeat) {
+        if (passwordInvalid(password)) return RespBean.error(RespBeanEnum.PASSWORD_FORMAT_ERROR);
+        if (!password.equals(repeat)) return RespBean.error(RespBeanEnum.PASSWORD_MATCH_ERROR);
+        else return RespBean.success();
+    }
+
+    /**
+     * Detailed validation of password format.
+     * Written as an extra method for easy future modification on restriction(s).
+     *
+     * @param password
+     * @return
+     */
+    @Override
+    public boolean passwordInvalid(String password) {
+        return password.length() < 6;
     }
 
 }
