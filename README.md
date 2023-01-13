@@ -28,7 +28,9 @@
   + [Listing & Detail Pages](#listing--detail-pages) ✅
   + [Purchase](#purchase) ✅
   + [Improvements & Load Tests](#improvements--load-tests) ✅
+* [Live Test Video](#live-test-video)
 * [DevLog: Feature Updates](#devlog-feature-updates)
+
 
 
 
@@ -129,6 +131,11 @@ Improvements have already been included in structure charts in above section. In
 <img width="1056" alt="message queue " src="https://user-images.githubusercontent.com/109834466/211381327-2660595f-938b-42ec-ace1-171070e8ac3f.png">
 
 * With message queue implemented, the system perfectly managed data spikes (shown as the yellow line) and maintained steady processing (shown as the green line), ensuring that the data is persisted and handled.
+
+
+## Live Test Video
+
+[<img width="556" alt="flashsale thumbnail" src="https://user-images.githubusercontent.com/109834466/212400100-b3722c0e-42ad-4e78-b4fa-7772c3dc61b2.png">](https://youtu.be/_mFMgD5mkB0 "Function Test")
 
 
 
