@@ -28,7 +28,7 @@
   + [Listing & Detail Pages](#listing--detail-pages) ✅
   + [Purchase](#purchase) ✅
   + [Improvements & Load Tests](#improvements--load-tests) ✅
-* [Live Test Video](#live-test-video)
+* [Live Test Video](#live-test-video) ✅
 * [DevLog: Feature Updates](#devlog-feature-updates)
 
 
