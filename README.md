@@ -130,7 +130,7 @@ Improvements have already been included in structure charts in above section. In
 
 <img width="1056" alt="message queue " src="https://user-images.githubusercontent.com/109834466/211381327-2660595f-938b-42ec-ace1-171070e8ac3f.png">
 
-* With message queue implemented, the system perfectly managed data spikes (shown as the yellow line) and maintained steady processing (shown as the green line), ensuring that the data is persisted and handled.
+* With message queue implemented, the system perfectly managed data spikes (marked as yellow) and maintained steady processing (marked as green) without crashing the database, ensuring that the data is persisted and handled.
 
 
 ## Live Test Video
