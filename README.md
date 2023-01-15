@@ -117,6 +117,15 @@ Improvements have already been included in structure charts in above section. In
 2. Minimize #requests to Redis and database.
 3. Implement a message queue to improved spike handling through asynchronous communication.
 
+#### Load Test Preparation & Settings
+
+Prepared 1500 users and user tickets (see implementation in UserUtil) for purchasing load test.
+
+<img width="739" alt="config" src="https://user-images.githubusercontent.com/109834466/212560051-79b807e8-40ae-48f0-8791-fbde132bd39e.png">
+
+<img width="744" alt="thread settings" src="https://user-images.githubusercontent.com/109834466/212559938-47a7ed84-ee15-49c2-9cd5-9de9fa938d06.png">
+
+
 #### Load Test Result: before improvements
 
 <img width="1079" alt="load test before improve" src="https://user-images.githubusercontent.com/109834466/211380593-7b29950d-1d7f-4e79-9fe2-c2c982b8cac0.png">
