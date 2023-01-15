@@ -105,9 +105,6 @@ In this project, I used @ControllerAdvice and @ExceptionHandler annotations to c
 3. Update on database: 
     - Send message to queue and wait for processing, where OrderService will update product stock in database when creating new order.
 
-<h3 align="center"> Improvements made during development </h3>
-
-Improvements have already been included in structure charts in above section. In this section, I will discuss about the results of these modifications.
 
 ### Improvements & Load Tests
 
