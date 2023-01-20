@@ -22,7 +22,6 @@
 
 ## Table of Contents
 
-* [Structure Overview](#structure-overview)
 * [Introduction](#introduction)
   + [Login & Register](#login--register) ✅
   + [Listing & Detail Pages](#listing--detail-pages) ✅
@@ -32,11 +31,6 @@
 * [DevLog: Feature Updates](#devlog-feature-updates)
 
 
-
-
-## Structure Overview
-
-### To be uploaded soon.
 
 ## Introduction 
 
